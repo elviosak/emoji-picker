@@ -2,6 +2,9 @@ const path = require("path");
 
 module.exports = {
   mode: process.NODE_ENV || "development",
+  node:{
+    __dirname:false
+  },
   entry: "./src",
   target: "node",
   output: {

@@ -1,6 +1,16 @@
-# nodegui-starter
+# Emoji Picker
+Just click to copy your Emoji
 
-**Clone and run for a quick way to see NodeGUI in action.**
+Built with [nodegui](https://github.com/nodegui/nodegui) and [nodegui-starter](https://github.com/nodegui/nodegui-starter)
+
+
+
+## Screenshots
+### App Window:
+![App Window](./screenshot/emoji.png)
+### System Tray:
+![System Tray](./screenshot/tray.png)
+
 
 ## To Use
 
@@ -12,18 +22,22 @@ From your command line:
 
 ```bash
 # Clone this repository
-git clone https://github.com/nodegui/nodegui-starter
+git clone https://github.com/slidinghotdog/emoji-picker
 # Go into the repository
-cd nodegui-starter
+cd emoji-picker
 # Install dependencies
 npm install
 # Run the app
 npm start
+
+# Or create an executable file for your platform
+npm run pack
 ```
 
-## Resources for Learning NodeGUI
+If there are many missing Emojis, your system font doesn't have emojis, you can install this package on Debian-based Linux:
 
-- [docs.nodegui.org](https://nodegui.github.io/nodegui) - all of NodeGui and React Desktop's documentation
+`sudo apt install ttf-ancient-fonts`
+
 
 ## License
 
