@@ -18,7 +18,7 @@ import {
 } from "@nodegui/nodegui";
 import path from "path";
 const emojis = require("./emojis.json");
-const font = require("./fonts/NotoEmoji-Regular.ttf");
+const font = require("./fonts/NotoColorEmoji.ttf");
 
 const id = QFontDatabase.addApplicationFont(
   path.resolve(__dirname, font.default)
@@ -157,11 +157,11 @@ win.setStyleSheet(
       padding:0;
     }
     * {
-      font-family: "NotoEmoji";
+      font-family: "NotoColorEmoji";
       font-size: 14px;
     }
     QMenu {
-      font-family: "NotoEmoji";
+      font-family: "NotoColorEmoji";
     }
     #emoji {
       font-size:32px;
