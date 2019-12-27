@@ -34,11 +34,6 @@ npm start
 npm run pack
 ```
 
-If there are many missing Emojis, your system font doesn't have emojis, you can install this package on Debian-based Linux:
-
-`sudo apt install ttf-ancient-fonts`
-
-
 ## License
 
 MIT

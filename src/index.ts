@@ -13,10 +13,16 @@ import {
   QApplication,
   QClipboardMode,
   QSystemTrayIcon,
-  QSystemTrayIconEvents
+  QSystemTrayIconEvents,
+  QFontDatabase
 } from "@nodegui/nodegui";
 import path from "path";
 const emojis = require("./emojis.json");
+const font = require("./fonts/NotoEmoji-Regular.ttf");
+
+const id = QFontDatabase.addApplicationFont(
+  path.resolve(__dirname, font.default)
+);
 
 const clipboard = QApplication.clipboard();
 const qApp = QApplication.instance();
@@ -53,7 +59,10 @@ function createTab({ category, data }) {
 
 const win = new QMainWindow();
 const tray = new QSystemTrayIcon();
-const icons = [require("./nodegui.png"), require("./nodegui_white.png")];
+const icons = [
+  require("./icons/nodegui.png"),
+  require("./icons/nodegui_white.png")
+];
 let iconIndex = 0;
 function toggleIcon() {
   iconIndex = 1 - iconIndex;
@@ -104,7 +113,7 @@ function categorySubMenu({ category, data }) {
     emojiAction.addEventListener("triggered", () => {
       clipboard.setText(emoji, QClipboardMode.Clipboard);
     });
-    
+
     subMenu.addAction(emojiAction);
   });
 
@@ -142,18 +151,23 @@ win.setStyleSheet(
   `
     #myroot {
       background-color: #888888;
+      
     }
     QTabWidget{
       padding:0;
     }
     * {
+      font-family: "NotoEmoji";
       font-size: 14px;
     }
-
+    QMenu {
+      font-family: "NotoEmoji";
+    }
     #emoji {
       font-size:32px;
     }
     QPushButton{
+      
       height:40px;
     }
     #emojiAction{
