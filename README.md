@@ -3,7 +3,7 @@ Just click to copy your Emoji
 
 Built with [nodegui](https://github.com/nodegui/nodegui) and [nodegui-starter](https://github.com/nodegui/nodegui-starter)
 
-
+[v1.0.0 linux Release (AppImage)](https://github.com/slidinghotdog/emoji-picker/releases/tag/v1.0.0)
 
 ## Screenshots
 ### App Window:
