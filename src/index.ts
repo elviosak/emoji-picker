@@ -1,5 +1,6 @@
 import {
   QMainWindow,
+  QMainWindowSignals,
   QWidget,
   QScrollArea,
   QLabel,
@@ -13,15 +14,16 @@ import {
   QApplication,
   QClipboardMode,
   QSystemTrayIcon,
-  QSystemTrayIconEvents,
-  QFontDatabase
+  QFontDatabase,
+  QFont,
 } from "@nodegui/nodegui";
 import path from "path";
+import { EventWidget, WidgetEventTypes } from "@nodegui/nodegui/dist/lib/core/EventWidget";
 const emojis = require("./emojis.json");
-const font = require("./fonts/NotoColorEmoji.ttf");
+const notoFont = require("./fonts/NotoColorEmoji.ttf");
 
 const id = QFontDatabase.addApplicationFont(
-  path.resolve(__dirname, font.default)
+  path.resolve(__dirname, notoFont.default)
 );
 
 const clipboard = QApplication.clipboard();
@@ -49,8 +51,8 @@ function createTab({ category, data }) {
     itemEmoji.addEventListener("clicked", () => {
       clipboard.setText(item.emoji, QClipboardMode.Clipboard);
     });
-    itemBox.addWidget(itemText);
-    itemBox.addWidget(itemEmoji);
+    itemBox.addWidget(itemText, 3);
+    itemBox.addWidget(itemEmoji,1);
     listBox.addLayout(itemBox);
   });
   const randomIndex = Math.floor(Math.random() * data.length);
@@ -92,14 +94,12 @@ function separator() {
   return separator;
 }
 
-tray.addEventListener(QSystemTrayIconEvents.messageClicked, e =>
-  console.log("triggered", e)
-);
-tray.addEventListener(QSystemTrayIconEvents.activated, e => {
+tray.addEventListener("activated", e => {
   if (e == 3) toggleWindow();
 });
 
 menu.addAction(separator());
+const font = new QFont("NotoColorEmoji", 20)
 
 function categorySubMenu({ category, data }) {
   const actionWithSubmenu = new QAction();
@@ -108,8 +108,9 @@ function categorySubMenu({ category, data }) {
   data.forEach(({ emoji, text }) => {
     const emojiAction = new QAction();
     emojiAction.setText(emoji);
-    //emojiAction.setProperty('toolTip', text)
-    //emojiAction.setProperty('objectName', "emojiAction")
+    emojiAction.setFont(font)
+    emojiAction.setProperty('toolTip', text)
+    emojiAction.setProperty('objectName', "action")
     emojiAction.addEventListener("triggered", () => {
       clipboard.setText(emoji, QClipboardMode.Clipboard);
     });
@@ -142,9 +143,11 @@ const tabs = new QTabWidget();
 emojis.forEach(cat => {
   createTab(cat);
 });
-
-win.resize(500, 400);
-win.setMinimumSize(500, 400);
+win.addEventListener(WidgetEventTypes.MouseButtonPress,()=>{
+  console.log('press')
+} )
+win.resize(600, 400);
+win.setMinimumSize(600, 400);
 
 win.setCentralWidget(tabs);
 win.setStyleSheet(
@@ -159,6 +162,9 @@ win.setStyleSheet(
     * {
       font-family: "NotoColorEmoji";
       font-size: 14px;
+    }
+    #action{
+      font-family: "NotoColorEmoji";
     }
     QMenu {
       font-family: "NotoColorEmoji";

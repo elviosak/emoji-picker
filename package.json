@@ -13,7 +13,7 @@
     "pack": "npx nodegui-packer --pack dist"
   },
   "dependencies": {
-    "@nodegui/nodegui": "^0.11.0",
+    "@nodegui/nodegui": "https://github.com/nodegui/nodegui/releases/download/latest-master/nodegui-master.tgz",
     "@nodegui/nodegui-os-utils": "^1.0.0"
   },
   "devDependencies": {
