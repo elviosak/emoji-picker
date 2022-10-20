@@ -22,7 +22,7 @@ From your command line:
 
 ```bash
 # Clone this repository
-git clone https://github.com/slidinghotdog/emoji-picker
+git clone https://github.com/elviosak/emoji-picker
 # Go into the repository
 cd emoji-picker
 # Install dependencies
